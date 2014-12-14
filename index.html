@@ -11,21 +11,83 @@
 </head>
 <body>
 	<div class="container-fluid">
+
+		<!-- Video Content -->
 		<div class="jumbotron">
-			<video id="videoPlayer" width="100%" height="100%" src="clip.mp4" autoplay="true" loop="true" muted="true"></video>
+			<!-- Here we use autostart false instead of autoplay true -->
+			<video width="100%" id="videoPlayer" height="100%" autostart="false" src="clip.mp4" loop="false" muted="false"></video>
+		<!-- Video Controls -->
+			<div class="videoControls">
+				<a href="#" class="btnPlay">
+					<span class="glyphicon glyphicon-play"></span>
+				</a>
+				<div class="videoTime">
+					<span class="current"></span><span class="duration"></span>
+				</div>
+				<a href="#" class="btnMute"><span class="glyphicon glyphicon-volume-up"></span></a>
+				<a href="#" class="btnFullscreen"><span class="glyphicon glyphicon-fullscreen"></span></a>
+				<div class="volume">
+					<label>  Volume </label>
+		            <button id="volDn"  title="Volume down button">-</button>
+		            <button id="volUp"  title="Volume up button">+</button>
+	            </div>
+			</div>
+
 		</div>
+		<!-- Video Content ENDS -->
+
 			<div class="row">
 				<div class="col-xs-6"><h2>Heading 1</h2></div>
 				<div class="col-xs-6"><h2>Heading 2</h2></div>
 			</div>
-		</div>
-	</div>
+	</div> 
+	<!-- Container Ends -->
+
 	<script src="node_modules/jquery/dist/jquery.js"></script>
 	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+	<script src="decimal.js"></script>
 	<script>
+	//Set up the vidoeoplayer variable. 
 		$(function(){
 			var $videoPlayer = $('#videoPlayer');
-		});
+
+	//Hook up the player with just the play functionality
+			// $('.btnPlay').click(function(){
+			// 	$videoPlayer[0].play();
+			// });
+
+	//Adding play and pause functionality with jQuery
+				$('.btnPlay').click(function(){
+					if($videoPlayer[0].paused){
+						$videoPlayer[0].play();
+						$('.glyphicon-play').attr('class', 'glyphicon glyphicon-pause');
+					} else {
+						$videoPlayer[0].pause();
+					  	$('.glyphicon-pause').attr('class', 'glyphicon glyphicon-play');
+					}
+					return false; 
+				});
+
+	//Including Time Within the interface:
+
+			$videoPlayer.on('timeupdate', function(){
+				//We can see that Ma.round is being used to a 2 decimal time stamp. 
+				$('.current').text(Math.round10($videoPlayer[0].currentTime, -2));
+			});
+
+	//Muting and unmuting the sound
+			$('.btnMute').click(function(){
+				if ($videoPlayer[0].muted == false){
+					$videoPlayer[0].muted = true;
+					$('.glyphicon-volume-up').attr('class', 'glyphicon glyphicon-volume-off');
+				} else {
+					$videoPlayer[0].muted = false;
+					$('.glyphicon-volume-off').attr('class', 'glyphicon glyphicon-volume-up');
+				}
+			});
+
+
+		}); //End of main document ready function
 	</script>
 </body>
 </html>
