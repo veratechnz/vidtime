@@ -1,0 +1,31 @@
+<!doctype html>
+<!-- http://www.webdesignermag.co.uk/tutorials/build-a-responsive-html5-video-player/ -->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vidtime</title>
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+	<style>
+	.container-fluid div.jumbotron{padding: 0px; margin-bottom: 0px;}
+	</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="jumbotron">
+			<video id="videoPlayer" width="100%" height="100%" src="clip.mp4" autoplay="true" loop="true" muted="true"></video>
+		</div>
+			<div class="row">
+				<div class="col-xs-6"><h2>Heading 1</h2></div>
+				<div class="col-xs-6"><h2>Heading 2</h2></div>
+			</div>
+		</div>
+	</div>
+	<script src="node_modules/jquery/dist/jquery.js"></script>
+	<script src="node_modules/bootstrap/dist/js/bootstrap.js"></script>
+	<script>
+		$(function(){
+			var $videoPlayer = $('#videoPlayer');
+		});
+	</script>
+</body>
+</html>
